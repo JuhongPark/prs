@@ -42,7 +42,7 @@ def get_bed_path(data_type, train_type, fold_num, in_fold_num=None, y=None, ex=N
     elif data_type == 'keep_bed_yi_ex':
         return_path = f'{cv_path}/temp/cv_{cv_num}_{train_type}_keep_{y}_{ex}'
     elif data_type == 'model_yi_ex':
-        return_path = f'{cv_path}/model/cv_{cv_num}_{train_type}_keep_{y}_{ex}'
+        return_path = f'{model_root}/cv_{cv_num}_{train_type}_{y}_{ex}'
     else:
         raise Exception(f'data_type: {data_type}')
     
