@@ -68,24 +68,3 @@ def get_var_from_kare(df_cdbk, var, option='match', match_col='변수명', renam
         as_list.append(table_df)
     merged = reduce(lambda x, y: pd.merge(x, y, on='RID', how='outer'), as_list)
     return merged
-
-
-def get_bed_path(data_type, train_type, fold_num, in_fold_num=None, y=None):
-    cv_path = f'{bed_root}/bed_cv/cv_{fold_num}'
-    if in_fold_num is None:
-        cv_num = f'{fold_num}'
-    else:
-        cv_num = f'{fold_num}_{in_fold_num}'
-
-    if train_type not in ('train', 'test'):
-        raise Exception(f'train_type: {train_type}')
-    
-    if data_type == 'score':
-        if in_fold_num is None:
-            return_path = f'{cv_path}/cv_{cv_num}_train_linear_y{y}_{train_type}_score.profile'
-    elif data_type == 'label':
-            return_path = f'{cv_path}/cv_{cv_num}_{train_type}.tsv'
-    else:
-        raise Exception(f'data_type: {data_type}')
-    
-    return return_path
