@@ -7,6 +7,12 @@ from sklearn.preprocessing import StandardScaler
 data_root = '/home2/jpark/Projects/prs/data'
 bed_root = f'{data_root}/bed'
 
+def execute_cmd(cmd):
+    start_time = time.time()
+    print(cmd)
+    os.system(cmd)
+    print(f'----- Execute cmd time(in minutes): {(time.time() - start_time)/60:.2f}m -----\n')
+
 def check_kare_cdbk(df_cdbk, condition, as_period=range(1, 9),title=None, display_col=None, index=True, merge_period=False):
             
     if title is not None:
@@ -68,3 +74,6 @@ def get_var_from_kare(df_cdbk, var, option='match', match_col='변수명', renam
         as_list.append(table_df)
     merged = reduce(lambda x, y: pd.merge(x, y, on='RID', how='outer'), as_list)
     return merged
+
+def get_model_key(dict_input):
+    return ''.join([f'{k}{v}' for k, v in dict_input.items()])
